@@ -12,6 +12,7 @@ namespace Dr.Mustafa_Clinic
 {
     public partial class Form1 : Form
     {
+        serial serial_generation;
         messaging message;
         Form2 newownerform;
         reminder schedule = new reminder();
@@ -39,8 +40,8 @@ namespace Dr.Mustafa_Clinic
             xbtngroup = Width / 2 - 70;
             ybtngroup = -mainbtngroup.Height;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-
-            notifyIcon1.Icon = new System.Drawing.Icon(@"D:\Kernel\23-9LASTTTTTT\17-9LV\Dr.Mustafa Clinic\dog.ico");
+            notifyIcon1.Icon = new System.Drawing.Icon("..\\..\\Resources\\dog.ico");
+            //D:\Kernel\23-9LASTTTTTT\17-9LV\Dr.Mustafa Clinic\Resources
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Pet Clinic";
             int xxxx = schedule.showvaccins() - 1;
@@ -78,8 +79,14 @@ namespace Dr.Mustafa_Clinic
             comboBox1.SelectedIndex = 0;
             setfullscreen();
             btngrouplocation();
+            //serial number verification
+            serial_generation = new serial();
+            if (serial_generation.send() != "67AFEBF22B540DAFBFF")
+            {
+                MessageBox.Show("This Is Not a Verified Machine, Please Contact Kernel Software Solutions Support Team 01280775883");
+                this.Close();
+            }
         }
-
         protected override CreateParams CreateParams
         {
             get
