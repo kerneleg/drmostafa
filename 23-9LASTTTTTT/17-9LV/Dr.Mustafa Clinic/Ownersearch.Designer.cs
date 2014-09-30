@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.OwnSearchDatagrid = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Close = new System.Windows.Forms.Button();
             this.owner_filter = new System.Windows.Forms.TextBox();
             this.mob_filter = new System.Windows.Forms.TextBox();
-            this.unpaid_combo = new System.Windows.Forms.ComboBox();
+            this.unpaid = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Choose = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.OwnSearchDatagrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -44,21 +44,12 @@
             this.OwnSearchDatagrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.OwnSearchDatagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OwnSearchDatagrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1});
+            this.Choose});
             this.OwnSearchDatagrid.Location = new System.Drawing.Point(12, 48);
             this.OwnSearchDatagrid.Name = "OwnSearchDatagrid";
             this.OwnSearchDatagrid.Size = new System.Drawing.Size(539, 443);
             this.OwnSearchDatagrid.TabIndex = 0;
             this.OwnSearchDatagrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column1.Text = "Select";
-            this.Column1.UseColumnTextForButtonValue = true;
             // 
             // Close
             // 
@@ -77,28 +68,26 @@
             this.owner_filter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.owner_filter.Location = new System.Drawing.Point(173, 21);
             this.owner_filter.Name = "owner_filter";
-            this.owner_filter.Size = new System.Drawing.Size(129, 20);
+            this.owner_filter.Size = new System.Drawing.Size(120, 20);
             this.owner_filter.TabIndex = 2;
             // 
             // mob_filter
             // 
             this.mob_filter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mob_filter.Location = new System.Drawing.Point(308, 21);
+            this.mob_filter.Location = new System.Drawing.Point(292, 21);
             this.mob_filter.Name = "mob_filter";
-            this.mob_filter.Size = new System.Drawing.Size(118, 20);
+            this.mob_filter.Size = new System.Drawing.Size(120, 20);
             this.mob_filter.TabIndex = 3;
             // 
-            // unpaid_combo
+            // unpaid
             // 
-            this.unpaid_combo.FormattingEnabled = true;
-            this.unpaid_combo.Items.AddRange(new object[] {
-            "",
-            "0",
-            ">0"});
-            this.unpaid_combo.Location = new System.Drawing.Point(432, 21);
-            this.unpaid_combo.Name = "unpaid_combo";
-            this.unpaid_combo.Size = new System.Drawing.Size(119, 21);
-            this.unpaid_combo.TabIndex = 6;
+            this.unpaid.AutoSize = true;
+            this.unpaid.Location = new System.Drawing.Point(414, 23);
+            this.unpaid.Name = "unpaid";
+            this.unpaid.Size = new System.Drawing.Size(104, 17);
+            this.unpaid.TabIndex = 8;
+            this.unpaid.Text = "Unpaid Amounts";
+            this.unpaid.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -110,14 +99,23 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
             // 
+            // Choose
+            // 
+            this.Choose.HeaderText = "Choose";
+            this.Choose.Name = "Choose";
+            this.Choose.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Choose.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Choose.Text = "Select";
+            this.Choose.UseColumnTextForButtonValue = true;
+            // 
             // Ownersearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DodgerBlue;
             this.ClientSize = new System.Drawing.Size(563, 538);
+            this.Controls.Add(this.unpaid);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.unpaid_combo);
             this.Controls.Add(this.mob_filter);
             this.Controls.Add(this.owner_filter);
             this.Controls.Add(this.Close);
@@ -139,9 +137,9 @@
         private System.Windows.Forms.Button Close;
         private System.Windows.Forms.TextBox owner_filter;
         private System.Windows.Forms.TextBox mob_filter;
-        private System.Windows.Forms.ComboBox unpaid_combo;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridViewButtonColumn Column1;
+        private System.Windows.Forms.CheckBox unpaid;
+        private System.Windows.Forms.DataGridViewButtonColumn Choose;
 
     }
 }

@@ -60,7 +60,7 @@ namespace Dr.Mustafa_Clinic
             {
                 conString = Properties.Settings.Default.Database1ConnectionString;
                 objConnect.connection_string = conString;
-                string sql = "SELECT Customerid,Name,Mob,Unpaid FROM Customers where Name LIKE @test  ";
+                string sql = "SELECT Customerid,Name,Mob,Unpaid FROM Customers where Name LIKE + @test+ '%'  ";
                 SqlConnection con = new SqlConnection(conString);
                 con.Open();
                 sCommand = new SqlCommand(sql, con);
@@ -76,6 +76,12 @@ namespace Dr.Mustafa_Clinic
                 OwnSearchDatagrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 OwnSearchDatagrid.Columns[1].Visible = false;
             }
+            OwnSearchDatagrid.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            OwnSearchDatagrid.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            OwnSearchDatagrid.Columns[3].HeaderText = "Mobile Number";
+            OwnSearchDatagrid.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            OwnSearchDatagrid.Columns[4].HeaderText = "Unpaid Amount";
+            OwnSearchDatagrid.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
         private void Close_Click(object sender, EventArgs e)
         {
@@ -99,38 +105,29 @@ namespace Dr.Mustafa_Clinic
                 objConnect.connection_string = conString;
                 string CNSearch = owner_filter.Text.ToString();
                 string MobSearch = mob_filter.Text.ToString();
-                int Unpcombo = unpaid_combo.SelectedIndex;
                 StringBuilder Sqlquery = new StringBuilder();
                 if (CNSearch != "")
                 {
                     if (MobSearch != "")
                     {
-                        if (Unpcombo == -1 || Unpcombo == 0)
+                        if (unpaid.CheckState == CheckState.Unchecked)
                         {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE'" + CNSearch + "%' and Mob LIKE '" + MobSearch + "%' ");
+                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE + @CNSearch + '%' and Mob LIKE + @MobSearch + '%' ");
                         }
-                        if (Unpcombo == 1)
+                        else
                         {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE'" + CNSearch + "%' and Mob LIKE '" + MobSearch + "%' and Unpaid = 0 ");
-                        }
-                        if (Unpcombo == 2)
-                        {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE'" + CNSearch + "%' and Mob LIKE '" + MobSearch + "%' and Unpaid > 0 ");
+                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE + @CNSearch + '%' and Mob LIKE + @MobSearch + '%' and Unpaid > 0 ");
                         }
                     }
                     if (MobSearch == "")
                     {
-                        if (Unpcombo == -1 || Unpcombo == 0)
+                        if (unpaid.CheckState == CheckState.Unchecked)
                         {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE'" + CNSearch + "%' ");
+                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE + @CNSearch + '%' ");
                         }
-                        if (Unpcombo == 1)
+                        else
                         {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE'" + CNSearch + "%' and Unpaid = 0 ");
-                        }
-                        if (Unpcombo == 2)
-                        {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE'" + CNSearch + "%' and Unpaid > 0 ");
+                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Name LIKE + @CNSearch + '%' and Unpaid > 0 ");
                         }
                     }
                 }
@@ -140,33 +137,25 @@ namespace Dr.Mustafa_Clinic
                     if (MobSearch == "")
                     {
 
-                        if (Unpcombo == -1 || Unpcombo == 0)
+                        if (unpaid.CheckState == CheckState.Unchecked)
                         {
                             Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers");
                         }
-                        if (Unpcombo == 1)
-                        {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Unpaid = 0 ");
-                        }
-                        if (Unpcombo == 2)
+                        else
                         {
                             Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Unpaid > 0 ");
                         }
                     }
                     else
                     {
-                        if (Unpcombo == -1 || Unpcombo == 0)
+                        if (unpaid.CheckState == CheckState.Unchecked)
                         {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Mob LIKE '" + MobSearch + "%' ");
+                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Mob LIKE + @MobSearch + '%' ");
                         }
-                        if (Unpcombo == 1)
+                        else
                         {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Mob LIKE '" + MobSearch + "%' and Unpaid = 0 ");
-                        }
-                        if (Unpcombo == 2)
-                        {
-                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Mob LIKE '" + MobSearch + "%' and Unpaid > 0 ");
-                        }
+                            Sqlquery.Append("SELECT Customerid,Name,Mob,Unpaid FROM Customers WHERE Mob LIKE + @MobSearch + '%' and Unpaid > 0 ");
+                        }                       
                     }
                 }
 
@@ -174,6 +163,8 @@ namespace Dr.Mustafa_Clinic
                 SqlConnection con = new SqlConnection(conString);
                 con.Open();
                 sCommand = new SqlCommand(Sqlquery.ToString(), con);
+                sCommand.Parameters.AddWithValue("@MobSearch", MobSearch);
+                sCommand.Parameters.AddWithValue("@CNSearch", CNSearch);
                 sAdapter = new SqlDataAdapter(sCommand);
                 sBuilder = new SqlCommandBuilder(sAdapter);
                 ds = new DataSet();

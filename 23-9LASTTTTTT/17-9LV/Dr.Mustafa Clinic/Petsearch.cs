@@ -79,6 +79,8 @@ namespace Dr.Mustafa_Clinic
                 }
             }
             con.Close();
+            /////////////////////////////////////////////
+            //fill data
             if (name == "")
             {
                 try
@@ -117,7 +119,7 @@ namespace Dr.Mustafa_Clinic
             else
             {
                 objConnect.connection_string = conString;
-                string sql = "SELECT Petid,Customerid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet where Name LIKE @test ";
+                string sql = "SELECT Petid,Customerid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet where Name LIKE + @test + '%' ";
 
 
                 con = new SqlConnection(conString);
@@ -141,6 +143,16 @@ namespace Dr.Mustafa_Clinic
                 PetSearchdataGrid.Columns[1].Visible = false;
                 PetSearchdataGrid.Columns[2].Visible = false;
             }
+            PetSearchdataGrid.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            PetSearchdataGrid.Columns[3].HeaderText = "Client Name";
+            PetSearchdataGrid.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            PetSearchdataGrid.Columns[4].HeaderText = "Pet Name";
+            PetSearchdataGrid.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            PetSearchdataGrid.Columns[5].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            PetSearchdataGrid.Columns[6].HeaderText = "Breed";
+            PetSearchdataGrid.Columns[6].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            PetSearchdataGrid.Columns[7].HeaderText = "This Week Vaccinations";
+            PetSearchdataGrid.Columns[7].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
         int weekly_vaccin(DateTime date)
         {
@@ -175,22 +187,22 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' and breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' and breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                         }
@@ -200,22 +212,22 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' and breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' and breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' and breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' and breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Name LIKE '" + pet_name + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Name LIKE + @pet_name + '%' and ThisWeek_Vaccin = 1");
                                 }
                              }
                         }
@@ -228,22 +240,22 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Type LIKE + @type + '%' and breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Type LIKE + @type + '%' and breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Type LIKE '" + type + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Type LIKE + @type + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and Type LIKE '" + type + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and Type LIKE + @type + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                         }
@@ -253,22 +265,22 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE'" + cust_name + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Custname LIKE + @cust_name + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                         }
@@ -284,22 +296,22 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' and breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' and breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' and Type LIKE '" + type + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' and Type LIKE + @type + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                         }
@@ -309,22 +321,22 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' and breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' and breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' and breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' and breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE '" + pet_name + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Name LIKE + @pet_name + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                         }
@@ -337,22 +349,22 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE + @type + '%' and breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE '" + type + "%' and breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE + @type + '%' and breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE '" + type + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE + @type + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE '" + type + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE Type LIKE + @type + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                         }
@@ -362,11 +374,11 @@ namespace Dr.Mustafa_Clinic
                             {
                                 if (vaccin_filter.CheckState == CheckState.Unchecked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE breed LIKE '" + breed + "%' ");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE breed LIKE + @breed + '%' ");
                                 }
                                 if (vaccin_filter.CheckState == CheckState.Checked)
                                 {
-                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE breed LIKE '" + breed + "%' and ThisWeek_Vaccin = 1");
+                                    Sqlquery.Append("SELECT Petid,Custname,Name,Type,breed,ThisWeek_Vaccin FROM Pet WHERE breed LIKE + @breed + '%' and ThisWeek_Vaccin = 1");
                                 }
                             }
                             else
@@ -387,6 +399,10 @@ namespace Dr.Mustafa_Clinic
                 SqlConnection con = new SqlConnection(conString);
                 con.Open();
                 sCommand = new SqlCommand(Sqlquery.ToString(), con);
+                sCommand.Parameters.AddWithValue("@cust_name", owner_filter.Text);
+                sCommand.Parameters.AddWithValue("@pet_name", pet_filter.Text);
+                sCommand.Parameters.AddWithValue("@type", type_filter.Text);
+                sCommand.Parameters.AddWithValue("@breed", breed_filter.Text);
                 sAdapter = new SqlDataAdapter(sCommand);
                 sBuilder = new SqlCommandBuilder(sAdapter);
                 ds = new DataSet();
