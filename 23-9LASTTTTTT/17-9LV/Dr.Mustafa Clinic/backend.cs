@@ -14,7 +14,6 @@ namespace Dr.Mustafa_Clinic
             for (i = 0; i < numbers.Count; i++)
             {
                 string s = send(numbers[i]);
-                int x;
                 //success ID
                 //erorr
             }

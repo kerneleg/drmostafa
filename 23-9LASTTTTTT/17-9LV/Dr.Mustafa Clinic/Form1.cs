@@ -41,11 +41,11 @@ namespace Dr.Mustafa_Clinic
             ybtngroup = -mainbtngroup.Height;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             notifyIcon1.Icon = new System.Drawing.Icon("..\\..\\Resources\\dog.ico");
-            //D:\Kernel\23-9LASTTTTTT\17-9LV\Dr.Mustafa Clinic\Resources
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Pet Clinic";
             int xxxx = schedule.showvaccins() - 1;
-            notifyIcon1.ShowBalloonTip(30000, "You have " + xxxx + " New Notifications", "Clich Here to see details", ToolTipIcon.Info);
+            messaging();
+            notifyIcon1.ShowBalloonTip(60000, "You have " + xxxx + " New Notifications", "Clich Here to see details", ToolTipIcon.Info);
         }
         void messaging()
         {
@@ -75,7 +75,6 @@ namespace Dr.Mustafa_Clinic
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            messaging();
             comboBox1.SelectedIndex = 0;
             setfullscreen();
             btngrouplocation();
