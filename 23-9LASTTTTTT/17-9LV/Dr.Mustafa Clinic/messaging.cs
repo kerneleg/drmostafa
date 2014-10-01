@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
 namespace Dr.Mustafa_Clinic
 {
     public partial class messaging : Form
     {
+        backend send;
         string conString;
         String query;     
         SqlConnection con;
@@ -21,10 +21,12 @@ namespace Dr.Mustafa_Clinic
         DataTable custTable;
         SqlDataAdapter sAdapter;
         SqlCommandBuilder sBuilder;
-        DataGridViewCheckBoxColumn c1;
+        List<string> numbers;
         public messaging()
         {
             InitializeComponent();
+            textBox1.Enabled = false;
+            numbers = new List<string>();
             conString = Properties.Settings.Default.Database1ConnectionString;
             con = new SqlConnection(conString);
             con.Open();
@@ -39,10 +41,6 @@ namespace Dr.Mustafa_Clinic
             dataGridView1.Columns[1].ReadOnly = true;
             dataGridView1.Columns[2].ReadOnly = true;
             con.Close();
-            c1 = new DataGridViewCheckBoxColumn();
-            c1.Name = "selection";
-            c1.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridView1.Columns.Add(c1);
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -51,6 +49,8 @@ namespace Dr.Mustafa_Clinic
             if (add.number != null)
             {
                 textBox1.AppendText(add.number);
+                textBox1.AppendText(",");
+                numbers.Add(add.number);
             }
         }
 
@@ -73,6 +73,20 @@ namespace Dr.Mustafa_Clinic
                     checkBox1.Text = "Select All Rows";
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int i;
+            for (i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if (Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value) == true)
+                {
+                    string x = dataGridView1.Rows[i].Cells[2].Value.ToString();
+                    numbers.Add(x);
+                }
+            }
+            send = new backend(numbers);
         }
     }
 }

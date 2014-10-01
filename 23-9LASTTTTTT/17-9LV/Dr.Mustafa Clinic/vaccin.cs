@@ -124,7 +124,7 @@ namespace Dr.Mustafa_Clinic
                 con.Close();
                 if (count == 0)
                 {
-                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid) VALUES(@pet_ID,@type,@dates,@comments,@Custid)";
+                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid,flag) VALUES(@pet_ID,@type,@dates,@comments,@Custid,@flag)";
                     con = new SqlConnection(conString);
                     con.Open();
                     command = new SqlCommand(query, con);
@@ -133,6 +133,7 @@ namespace Dr.Mustafa_Clinic
                     command.Parameters.AddWithValue("@dates", main_date.Value);
                     command.Parameters.AddWithValue("@comments", main_text.Text);
                     command.Parameters.AddWithValue("@Custid", ownerID);
+                    command.Parameters.AddWithValue("@flag", "False");
                     command.ExecuteNonQuery();
                     con.Close();
                 }
@@ -151,7 +152,7 @@ namespace Dr.Mustafa_Clinic
                 con.Close();
                 if (count == 0)
                 {
-                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid) VALUES(@pet_ID,@type,@dates,@comments,@Custid)";
+                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid,flag) VALUES(@pet_ID,@type,@dates,@comments,@Custid,@flag)";
                     con = new SqlConnection(conString);
                     con.Open();
                     command = new SqlCommand(query, con);
@@ -160,6 +161,7 @@ namespace Dr.Mustafa_Clinic
                     command.Parameters.AddWithValue("@dates", insects_date.Value);
                     command.Parameters.AddWithValue("@comments", insects_text.Text);
                     command.Parameters.AddWithValue("@Custid", ownerID);
+                    command.Parameters.AddWithValue("@flag", "False");
                     command.ExecuteNonQuery();
                     con.Close();
                 }
@@ -179,7 +181,7 @@ namespace Dr.Mustafa_Clinic
                 if (count == 0)
                 {
                     count = 0;
-                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid) VALUES(@pet_ID,@type,@dates,@comments,@Custid)";
+                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid,flag) VALUES(@pet_ID,@type,@dates,@comments,@Custid,@flag)";
                     con = new SqlConnection(conString);
                     con.Open();
                     command = new SqlCommand(query, con);
@@ -188,6 +190,7 @@ namespace Dr.Mustafa_Clinic
                     command.Parameters.AddWithValue("@dates", worms_date.Value);
                     command.Parameters.AddWithValue("@comments", worms_text.Text);
                     command.Parameters.AddWithValue("@Custid", ownerID);
+                    command.Parameters.AddWithValue("@flag", "False");
                     command.ExecuteNonQuery();
                     con.Close();
                 }
@@ -208,7 +211,7 @@ namespace Dr.Mustafa_Clinic
                 if (count == 0)
                 {
                     count = 0;
-                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid) VALUES(@pet_ID,@type,@dates,@comments,@Custid)";
+                    query = "INSERT INTO Vaccins (pet_ID,type,dates,comments,Custid,flag) VALUES(@pet_ID,@type,@dates,@comments,@Custid,@flag)";
                     con = new SqlConnection(conString);
                     con.Open();
                     command = new SqlCommand(query, con);
@@ -217,6 +220,7 @@ namespace Dr.Mustafa_Clinic
                     command.Parameters.AddWithValue("@dates", rabies_date.Value);
                     command.Parameters.AddWithValue("@comments", rabies_text.Text);
                     command.Parameters.AddWithValue("@Custid", ownerID);
+                    command.Parameters.AddWithValue("@flag", "False");
                     command.ExecuteNonQuery();
                     con.Close();
                 }

@@ -18,6 +18,7 @@ namespace Dr.Mustafa_Clinic
         Ownersearch osearch;
         Petsearch psearch;
         aboutus aboutfrm;
+        backend send;
         int xbtngroup;
         int ybtngroup;
         int Fwellcom1 = 0;
@@ -47,31 +48,29 @@ namespace Dr.Mustafa_Clinic
         }
         void messaging()
         {
-            List<int> customer_list = new List<int>();
+            List<string> customer_list = new List<string>();
             DateTime date = DateTime.Today.AddDays(1);
             conString = Properties.Settings.Default.Database1ConnectionString;
             con = new SqlConnection(conString);
             con.Open();
-            query = "select Custid,Dates from Vaccins where Dates = '" + date + "' and flag!= 'True' ";
+            query = "select Customers.Mob from Customers join Vaccins on Customers.Customerid = Vaccins.Custid where Vaccins.dates= '" + date + "' and Vaccins.flag!= 'True' ";
+            //query = "select Custid,Dates from Vaccins where Dates = '" + date + "' and flag!= 'True' ";
             command = new SqlCommand(query, con);
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                customer_list.Add(reader.GetInt32(0));
+                customer_list.Add(reader.GetString(0));
             }
             con.Close();
             //send the message to customer_list
+            //send = new backend(customer_list);
             ////////////////change the condition of vaccin record flag
-            int i;
-            for (i = 0; i < customer_list.Count; i++)
-            {
-                con = new SqlConnection(conString);
-                con.Open();
-                query = "update Vaccins set flag = 'True' where Dates = '" + date + "' ";
-                command = new SqlCommand(query, con);
-                command.ExecuteNonQuery();
-                con.Close();
-            }
+            con = new SqlConnection(conString);
+            con.Open();
+            query = "update Vaccins set flag = 'True' where Dates = '" + date + "' ";
+            command = new SqlCommand(query, con);
+            command.ExecuteNonQuery();
+            con.Close();
         }
         private void Form1_Load(object sender, EventArgs e)
         {

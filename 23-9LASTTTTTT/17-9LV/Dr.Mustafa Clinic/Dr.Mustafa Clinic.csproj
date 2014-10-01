@@ -94,11 +94,12 @@
     <Compile Include="aboutus.Designer.cs">
       <DependentUpon>aboutus.cs</DependentUpon>
     </Compile>
-    <Compile Include="addcontacr.cs">
+    <Compile Include="backend.cs" />
+    <Compile Include="contacts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addcontacr.Designer.cs">
-      <DependentUpon>addcontacr.cs</DependentUpon>
+    <Compile Include="contacts.Designer.cs">
+      <DependentUpon>contacts.cs</DependentUpon>
     </Compile>
     <Compile Include="Database1DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -171,8 +172,8 @@
     <EmbeddedResource Include="aboutus.resx">
       <DependentUpon>aboutus.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addcontacr.resx">
-      <DependentUpon>addcontacr.cs</DependentUpon>
+    <EmbeddedResource Include="contacts.resx">
+      <DependentUpon>contacts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>
