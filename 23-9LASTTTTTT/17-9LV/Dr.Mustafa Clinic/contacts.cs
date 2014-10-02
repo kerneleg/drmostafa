@@ -20,6 +20,7 @@ namespace Dr.Mustafa_Clinic
         private void Save_Click(object sender, EventArgs e)
         {
             number = textBox1.Text;
+            this.Close();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

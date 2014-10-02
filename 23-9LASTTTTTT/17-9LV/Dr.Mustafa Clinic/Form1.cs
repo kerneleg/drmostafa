@@ -12,12 +12,14 @@ namespace Dr.Mustafa_Clinic
 {
     public partial class Form1 : Form
     {
+        serial serial_generation;
         messaging message;
         Form2 newownerform;
         reminder schedule = new reminder();
         Ownersearch osearch;
         Petsearch psearch;
         aboutus aboutfrm;
+        backend send;
         int xbtngroup;
         int ybtngroup;
         int Fwellcom1 = 0;
@@ -41,50 +43,54 @@ namespace Dr.Mustafa_Clinic
             xbtngroup = Width / 2 - 70;
             ybtngroup = -mainbtngroup.Height;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            
             notifyIcon1.Icon = Dr.Mustafa_Clinic.Properties.Resources.dog;
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Pet Clinic";
             int xxxx = schedule.showvaccins() - 1;
-            notifyIcon1.ShowBalloonTip(30000, "You have " + xxxx + " New Notifications", "Clich Here to see details", ToolTipIcon.Info);
+            messaging();
+            notifyIcon1.ShowBalloonTip(60000, "You have " + xxxx + " New Notifications", "Clich Here to see details", ToolTipIcon.Info);
         }
         void messaging()
         {
-            List<int> customer_list = new List<int>();
+            List<string> customer_list = new List<string>();
             DateTime date = DateTime.Today.AddDays(1);
             conString = ModifiedConnection.GlobalValue;
             con = new SqlConnection(conString);
             con.Open();
-            query = "select Custid,Dates from Vaccins where Dates = '" + date + "' and flag!= 'True' ";
+            query = "select Customers.Mob from Customers join Vaccins on Customers.Customerid = Vaccins.Custid where Vaccins.dates= '" + date + "' and Vaccins.flag!= 'True' ";
+            //query = "select Custid,Dates from Vaccins where Dates = '" + date + "' and flag!= 'True' ";
             command = new SqlCommand(query, con);
             reader = command.ExecuteReader();
             while (reader.Read())
             {
-                customer_list.Add(reader.GetInt32(0));
+                customer_list.Add(reader.GetString(0));
             }
             con.Close();
             //send the message to customer_list
+            //send = new backend(customer_list);
             ////////////////change the condition of vaccin record flag
-            int i;
-            for (i = 0; i < customer_list.Count; i++)
-            {
-                con = new SqlConnection(conString);
-                con.Open();
-                query = "update Vaccins set flag = 'True' where Dates = '" + date + "' ";
-                command = new SqlCommand(query, con);
-                command.ExecuteNonQuery();
-                con.Close();
-            }
+            con = new SqlConnection(conString);
+            con.Open();
+            query = "update Vaccins set flag = 'True' where Dates = '" + date + "' ";
+            command = new SqlCommand(query, con);
+            command.ExecuteNonQuery();
+            con.Close();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            messaging();
             comboBox1.SelectedIndex = 0;
             setfullscreen();
             btngrouplocation();
-            
-        }
 
+            //serial number verification
+            serial_generation = new serial();
+            if (serial_generation.send() != "67AFEBF22B540DAFBFF")
+            {
+                MessageBox.Show("This Is Not a Verified Machine, Please Contact Kernel Software Solutions Support Team 01280775883");
+                this.Close();
+            }
+
+        }
         protected override CreateParams CreateParams
         {
             get
