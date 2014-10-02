@@ -40,10 +40,6 @@ namespace Dr.Mustafa_Clinic
                     {
                         conString = Dr.Mustafa_Clinic.ModifiedConnection.GlobalValue;
                     }
-                    if (fff == 1)
-                    {
-                        conString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Ahmed\Kernel\k\Database2.mdf;Integrated Security=True";
-                    }
                     objConnect.connection_string = conString;
                     string sql = "SELECT Customerid,Name,Mob,Unpaid FROM Customers";
                     SqlConnection con = new SqlConnection(conString);

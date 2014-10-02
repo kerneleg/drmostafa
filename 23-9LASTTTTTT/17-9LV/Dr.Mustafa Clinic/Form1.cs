@@ -84,7 +84,7 @@ namespace Dr.Mustafa_Clinic
 
             //serial number verification
             serial_generation = new serial();
-            if (serial_generation.send() != "67AFEBF22B540DAFBFF")
+            if (serial_generation.send() != "6A9FEBF24F8463EFBFF")
             {
                 MessageBox.Show("This Is Not a Verified Machine, Please Contact Kernel Software Solutions Support Team 01280775883");
                 this.Close();
