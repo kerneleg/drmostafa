@@ -46,6 +46,8 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.Backup = new System.Windows.Forms.Button();
+            this.Restore = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.mainbtngroup.SuspendLayout();
@@ -90,7 +92,6 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::Dr.Mustafa_Clinic.Properties.Resources.Search;
             this.pictureBox1.Location = new System.Drawing.Point(6, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(24, 24);
@@ -147,7 +148,6 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::Dr.Mustafa_Clinic.Properties.Resources.Profile;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(6, 17);
             this.button1.Name = "button1";
@@ -164,7 +164,6 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Image = global::Dr.Mustafa_Clinic.Properties.Resources._1409069457_Calendar_48;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(164, 17);
             this.button3.Name = "button3";
@@ -181,7 +180,6 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.Red;
-            this.button5.Image = global::Dr.Mustafa_Clinic.Properties.Resources.Exit;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.Location = new System.Drawing.Point(318, 17);
             this.button5.Name = "button5";
@@ -232,6 +230,26 @@
             this.timer3.Interval = 900000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
+            // Backup
+            // 
+            this.Backup.Location = new System.Drawing.Point(18, 735);
+            this.Backup.Name = "Backup";
+            this.Backup.Size = new System.Drawing.Size(108, 33);
+            this.Backup.TabIndex = 18;
+            this.Backup.Text = "Backup";
+            this.Backup.UseVisualStyleBackColor = true;
+            this.Backup.Click += new System.EventHandler(this.Backup_Click);
+            // 
+            // Restore
+            // 
+            this.Restore.Location = new System.Drawing.Point(132, 735);
+            this.Restore.Name = "Restore";
+            this.Restore.Size = new System.Drawing.Size(108, 33);
+            this.Restore.TabIndex = 19;
+            this.Restore.Text = "Restore";
+            this.Restore.UseVisualStyleBackColor = true;
+            this.Restore.Click += new System.EventHandler(this.Restore_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,6 +259,8 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(985, 780);
             this.ControlBox = false;
+            this.Controls.Add(this.Restore);
+            this.Controls.Add(this.Backup);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mainbtngroup);
@@ -280,6 +300,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Button Backup;
+        private System.Windows.Forms.Button Restore;
 
     }
 }

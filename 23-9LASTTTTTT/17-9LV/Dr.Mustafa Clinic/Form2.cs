@@ -36,7 +36,7 @@ namespace Dr.Mustafa_Clinic
             try
             {
                 ownerId = owner_id;
-                conString = Properties.Settings.Default.Database1ConnectionString;
+                conString = ModifiedConnection.GlobalValue;
                 StringBuilder Sqlquery = new StringBuilder();
                 Sqlquery.Append("SELECT * FROM Customers WHERE Customerid='" + owner_id + "' ");
 
@@ -120,7 +120,7 @@ namespace Dr.Mustafa_Clinic
                         {
                             save_flag = 1;
                             //insert///////////////////////
-                            conString = Properties.Settings.Default.Database1ConnectionString;
+                            conString = ModifiedConnection.GlobalValue;
                             String query = "INSERT INTO Customers (Name,Mob,Address,Age,Gender,Phone,Unpaid) VALUES(@Name,@Mob,@Address,@Age,@Gender,@Phone,@Unpaid)";
                             SqlConnection con = new SqlConnection(conString);
                             con.Open();
@@ -150,7 +150,7 @@ namespace Dr.Mustafa_Clinic
                     {
                         //update/////////////////////
                         save_flag = 1;
-                        conString = Properties.Settings.Default.Database1ConnectionString;
+                        conString = ModifiedConnection.GlobalValue;
                         string query = "update Customers set Name= @Name,Mob=@Mob,Address=@Address,Age=@Age,Gender=@Gender,Phone=@Phone,Unpaid=@Unpaid where Customerid='" + ownerId + "' ";
 
                         SqlConnection con = new SqlConnection(conString);

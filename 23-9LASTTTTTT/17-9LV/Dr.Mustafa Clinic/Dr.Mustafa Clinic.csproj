@@ -118,6 +118,7 @@
     <Compile Include="messaging.Designer.cs">
       <DependentUpon>messaging.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModifiedConnection.cs" />
     <Compile Include="owner_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,16 +246,22 @@
     <Content Include="Database1_log.ldf">
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\treatment.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\Pets.png" />
     <None Include="Resources\land.jpg" />
     <EmbeddedResource Include="Resources\land.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="dog.ico" />
     <EmbeddedResource Include="Resources\dog.ico" />
+    <None Include="Resources\avatar.png" />
+    <None Include="Resources\animals.png" />
+    <None Include="Resources\Calendar.png" />
     <Content Include="Resources\Moon-wallpaper.jpg" />
     <None Include="Resources\Search2.png" />
     <None Include="Resources\Search1.png" />
-    <None Include="Resources\Search.png" />
+    <EmbeddedResource Include="Resources\Search.png" />
     <None Include="Resources\animal.png" />
     <EmbeddedResource Include="Resources\dog2.png" />
     <None Include="Resources\dog1.png" />
@@ -266,7 +273,7 @@
     <None Include="Resources\Exit.png" />
     <None Include="Resources\1409069631_treatment-48.png" />
     <None Include="Resources\1409069457_Calendar-48.png" />
-    <None Include="Resources\Profile.png" />
+    <EmbeddedResource Include="Resources\Profile.png" />
     <None Include="Resources\1409068194_plus.png" />
     <None Include="Resources\1409068112_avatar.png" />
     <None Include="Resources\1409068666_Pets.png" />

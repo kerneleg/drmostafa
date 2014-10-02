@@ -35,7 +35,7 @@ namespace Dr.Mustafa_Clinic
         {
             try
             {
-                conString = Properties.Settings.Default.Database1ConnectionString;
+                conString = ModifiedConnection.GlobalValue;
                 Sqlquery = new StringBuilder();
                 Sqlquery.Append("SELECT * FROM Customers WHERE Customerid='" + cust_id + "' ");
 
@@ -111,7 +111,7 @@ namespace Dr.Mustafa_Clinic
 
         private void delete_Click(object sender, EventArgs e)
         {
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             String query = "delete Vaccins WHERE Custid='" + cust_id + "' ";
             SqlConnection con = new SqlConnection(conString);
             con.Open();

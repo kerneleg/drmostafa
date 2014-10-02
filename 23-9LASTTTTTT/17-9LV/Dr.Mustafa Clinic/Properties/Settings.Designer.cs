@@ -25,6 +25,15 @@ namespace Dr.Mustafa_Clinic.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Customers")]
+        public string SQL {
+            get {
+                return ((string)(this["SQL"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\Users\\Ahmed\\Kernel\\drmostafa\\23-9" +
             "LASTTTTTT\\17-9LV\\Dr.Mustafa Clinic\\Database1.mdf;Integrated Security=True")]
@@ -34,12 +43,16 @@ namespace Dr.Mustafa_Clinic.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SELECT * FROM Customers")]
-        public string SQL {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\v11.0;AttachDbFilename=C:\\Users\\Ahmed\\Kernel\\drmostafa\\23-9" +
+            "LASTTTTTT\\17-9LV\\Dr.Mustafa Clinic\\Database1.mdf;Integrated Security=True")]
+        public string DBConnect {
             get {
-                return ((string)(this["SQL"]));
+                return ((string)(this["DBConnect"]));
+            }
+            set {
+                this["DBConnect"] = value;
             }
         }
     }

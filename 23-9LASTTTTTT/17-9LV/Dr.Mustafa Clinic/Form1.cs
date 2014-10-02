@@ -32,14 +32,17 @@ namespace Dr.Mustafa_Clinic
         SqlDataReader reader;
         string conString;
         String query;
+        int fffffl = 0;
+        public string datasource;
         public Form1()
         {
             InitializeComponent();
+            ModifiedConnection.GlobalValue = Properties.Settings.Default.DBConnect;
             xbtngroup = Width / 2 - 70;
             ybtngroup = -mainbtngroup.Height;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-
-            notifyIcon1.Icon = new System.Drawing.Icon(@"C:\Users\Ahmed\Kernel\drmostafa\23-9LASTTTTTT\17-9LV\Dr.Mustafa Clinic\dog.ico");
+            
+            notifyIcon1.Icon = Dr.Mustafa_Clinic.Properties.Resources.dog;
             notifyIcon1.Visible = true;
             notifyIcon1.Text = "Pet Clinic";
             int xxxx = schedule.showvaccins() - 1;
@@ -49,7 +52,7 @@ namespace Dr.Mustafa_Clinic
         {
             List<int> customer_list = new List<int>();
             DateTime date = DateTime.Today.AddDays(1);
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             con = new SqlConnection(conString);
             con.Open();
             query = "select Custid,Dates from Vaccins where Dates = '" + date + "' and flag!= 'True' ";
@@ -79,6 +82,7 @@ namespace Dr.Mustafa_Clinic
             comboBox1.SelectedIndex = 0;
             setfullscreen();
             btngrouplocation();
+            
         }
 
         protected override CreateParams CreateParams
@@ -258,8 +262,8 @@ namespace Dr.Mustafa_Clinic
         {
             if (comboBox1.SelectedIndex == 0)
             {
-
-                osearch = new Ownersearch(textBox1.Text);
+                
+                osearch = new Ownersearch(textBox1.Text,fffffl);
                 osearch.ShowDialog();
 
             }
@@ -301,5 +305,65 @@ namespace Dr.Mustafa_Clinic
             messaging();
         }
 
+        private void Backup_Click(object sender, EventArgs e)
+        {
+            string DbName;
+            string path;
+            SaveFileDialog savedialog = new SaveFileDialog();
+            savedialog.Filter = "Backup File (*.bak)|*.bak";
+            savedialog.Title = "File Location";
+            savedialog.ShowDialog();
+            MessageBox.Show("Your Database Backup has Successfully stored to " + savedialog.InitialDirectory + "111 " + savedialog.RestoreDirectory, "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DbName=savedialog.FileName.Substring(savedialog.FileName.LastIndexOf("\\") + 1);
+            DbName = DbName.Substring(0, DbName.Length - 4);
+            path = savedialog.FileName.Substring(0, savedialog.FileName.LastIndexOf("\\"));
+            if (savedialog.FileName != "")
+            {
+                conString = ModifiedConnection.GlobalValue;
+                con = new SqlConnection(conString);
+                con.Open();
+                command = new SqlCommand(@"backup database [C:\Users\Ahmed\Kernel\drmostafa\23-9LASTTTTTT\17-9LV\Dr.Mustafa Clinic\Database1.mdf] to DISK = '"+savedialog.FileName+"'", con);
+                command.ExecuteNonQuery();
+                con.Close();
+                try
+                {
+                    ////////////////////
+                    con = new SqlConnection(conString);
+                    con.Open();
+                    command = new SqlCommand(@"RESTORE DATABASE Database3 FROM DISK = '" + savedialog.FileName + "' WITH MOVE 'Database1' TO 'C:\\Users\\Ahmed\\Kernel\\k\\" + DbName + ".mdf',MOVE 'Database1_log' TO 'C:\\Users\\Ahmed\\Kernel\\k\\" + DbName + ".ldf', REPLACE", con);
+                    reader = command.ExecuteReader();
+
+                    // MessageBox.Show("Result=" + reader.RecordsAffected);
+                    con.Close();
+                    //////////////
+                }
+                catch (Exception err)
+                {
+
+                    MessageBox.Show(err.Message);
+
+                }
+                MessageBox.Show("Your Database Backup has Successfully stored to "+savedialog.FileName, "Backup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Restore_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = "Choose the Required Database";
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "Backup File (*.mdf)|*.mdf";
+            fdlg.FilterIndex = 2;
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(fdlg.FileName);
+            }
+            ModifiedConnection.GlobalValue = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=" + fdlg.FileName + ";Integrated Security=True";
+            Properties.Settings.Default.DBConnect = ModifiedConnection.GlobalValue;
+            Properties.Settings.Default.Save();
+            //ModifiedConnection.GlobalValue = ModifiedConnection.GlobalValue.Replace(@"\\", @"\");
+        }
+        
     }
 }

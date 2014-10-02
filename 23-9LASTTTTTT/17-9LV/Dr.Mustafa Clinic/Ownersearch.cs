@@ -21,10 +21,13 @@ namespace Dr.Mustafa_Clinic
         DataSet ds;
         DataTable sTable;
         string name;
-        public Ownersearch(string temp_name)
+        
+        int fff;
+        public Ownersearch(string temp_name,int ffffl)
         {
             InitializeComponent();
             name = temp_name;
+            fff = ffffl;
             refresh();
         }
         void refresh()
@@ -33,7 +36,14 @@ namespace Dr.Mustafa_Clinic
             {
                 try
                 {
-                    conString = Properties.Settings.Default.Database1ConnectionString;
+                    if(fff==0)
+                    {
+                        conString = Dr.Mustafa_Clinic.ModifiedConnection.GlobalValue;
+                    }
+                    if (fff == 1)
+                    {
+                        conString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Ahmed\Kernel\k\Database2.mdf;Integrated Security=True";
+                    }
                     objConnect.connection_string = conString;
                     string sql = "SELECT Customerid,Name,Mob,Unpaid FROM Customers";
                     SqlConnection con = new SqlConnection(conString);
@@ -58,7 +68,7 @@ namespace Dr.Mustafa_Clinic
             }
             else
             {
-                conString = Properties.Settings.Default.Database1ConnectionString;
+                conString = ModifiedConnection.GlobalValue;
                 objConnect.connection_string = conString;
                 string sql = "SELECT Customerid,Name,Mob,Unpaid FROM Customers where Name LIKE + @test+ '%'  ";
                 SqlConnection con = new SqlConnection(conString);
@@ -101,7 +111,7 @@ namespace Dr.Mustafa_Clinic
         {
             try
             {
-                conString = Properties.Settings.Default.Database1ConnectionString;
+                conString = ModifiedConnection.GlobalValue;
                 objConnect.connection_string = conString;
                 string CNSearch = owner_filter.Text.ToString();
                 string MobSearch = mob_filter.Text.ToString();

@@ -42,7 +42,7 @@ namespace Dr.Mustafa_Clinic
             try
             {
                 /////fill data
-                conString = Properties.Settings.Default.Database1ConnectionString;
+                conString = ModifiedConnection.GlobalValue;
                 StringBuilder Sqlquery = new StringBuilder();
                 Sqlquery.Append("SELECT * FROM Pet WHERE Petid='" + pet_id + "' ");
 
@@ -82,7 +82,7 @@ namespace Dr.Mustafa_Clinic
         }
         void fill(string id)
         {
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             SqlConnection con = new SqlConnection(conString);
             con.Open();
             string query = "select Name,Mob from Customers where Customerid = '" + ownerID + "' ";
@@ -113,7 +113,7 @@ namespace Dr.Mustafa_Clinic
                 if (ID == "")
                 {
 
-                    conString = Properties.Settings.Default.Database1ConnectionString;
+                    conString = ModifiedConnection.GlobalValue;
                     StringBuilder Sqlquery = new StringBuilder();
                     Sqlquery.Append("SELECT Petid FROM Pet");
 
@@ -164,7 +164,7 @@ namespace Dr.Mustafa_Clinic
                         if (saveFlag == 0)
                         {
                             saveFlag = 1;
-                            conString = Properties.Settings.Default.Database1ConnectionString;
+                            conString = ModifiedConnection.GlobalValue;
                             SqlConnection con = new SqlConnection(conString);
                             con.Open();
                             string owner_name = "";
@@ -204,7 +204,7 @@ namespace Dr.Mustafa_Clinic
                     {
                         //update
                         saveFlag = 1;
-                        conString = Properties.Settings.Default.Database1ConnectionString;
+                        conString = ModifiedConnection.GlobalValue;
                         //String query = "update Pet set Name= '" + name.Text + "' ,Agebydays= '" + days.Text + "',Agebyweeks= '" + weeks.Text + "',Agebymonths= '" + months.Text + "',Agebyyears= '" + years.Text + "',sex= '" + sex.SelectedIndex + "',Type= '" + type.Text + "',breed= '" + breed.Text + "',color= '" + color.Text + "',Marking= '" + markings.Text + "' where Petid='" + ID + "' ";
                         String query = "update Pet set Name= @Name,Agebydays= @Agebydays,Agebyweeks=@Agebyweeks,Agebymonths=@Agebymonths,Agebyyears= @Agebyyears,sex=@sex,Type= @Type,breed= @breed,color= @color,Marking= @Marking where Petid='" + ID + "' ";
                         SqlConnection con = new SqlConnection(conString);

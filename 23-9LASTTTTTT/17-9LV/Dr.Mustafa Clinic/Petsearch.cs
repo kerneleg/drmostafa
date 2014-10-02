@@ -36,7 +36,7 @@ namespace Dr.Mustafa_Clinic
         void refresh()
         {
             ///////// this week vaccinations
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             con = new SqlConnection(conString);
             con.Open();
             query = "select Dates,pet_ID from Vaccins";
@@ -170,7 +170,7 @@ namespace Dr.Mustafa_Clinic
         {
             try
             {
-                conString = Properties.Settings.Default.Database1ConnectionString;
+                conString = ModifiedConnection.GlobalValue;
                 objConnect.connection_string = conString;
                 string cust_name = owner_filter.Text.ToString();
                 string pet_name = pet_filter.Text.ToString();

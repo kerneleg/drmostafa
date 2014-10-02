@@ -46,7 +46,7 @@ namespace Dr.Mustafa_Clinic
             this.monthCalendar1.MaxSelectionCount = 1;
             DateTime day = new DateTime();
             day = this.monthCalendar1.SelectionRange.Start.Date;
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             StringBuilder Sqlquery = new StringBuilder();
             day.ToString(new CultureInfo("en-US"));
 

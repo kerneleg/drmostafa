@@ -36,7 +36,7 @@ namespace Dr.Mustafa_Clinic
             insects_text.Enabled = false;
             rabies_text.Enabled = false;
             worms_text.Enabled = false;
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             con = new SqlConnection(conString);
             con.Open();
             query = "select Name,Mob from Customers where Customerid = '" + owner_id + "' ";
@@ -283,7 +283,7 @@ namespace Dr.Mustafa_Clinic
 
         private void main_delete_Click(object sender, EventArgs e)
         {
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             query = "delete Vaccins WHERE pet_ID='" + petID + "' and type= 'Main' ";
             con = new SqlConnection(conString);
             con.Open();
@@ -295,7 +295,7 @@ namespace Dr.Mustafa_Clinic
 
         private void worms_delete_Click(object sender, EventArgs e)
         {
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             query = "delete Vaccins WHERE pet_ID='" + petID + "' and type= 'Worms' ";
             con = new SqlConnection(conString);
             con.Open();
@@ -307,7 +307,7 @@ namespace Dr.Mustafa_Clinic
 
         private void insects_delete_Click(object sender, EventArgs e)
         {
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             query = "delete Vaccins WHERE pet_ID='" + petID + "' and type= 'Insects' ";
             con = new SqlConnection(conString);
             con.Open();
@@ -319,7 +319,7 @@ namespace Dr.Mustafa_Clinic
 
         private void rabies_delete_Click(object sender, EventArgs e)
         {
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             query = "delete Vaccins WHERE pet_ID='" + petID + "' and type= 'Rabies' ";
             con = new SqlConnection(conString);
             con.Open();

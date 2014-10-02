@@ -25,7 +25,7 @@ namespace Dr.Mustafa_Clinic
         public messaging()
         {
             InitializeComponent();
-            conString = Properties.Settings.Default.Database1ConnectionString;
+            conString = ModifiedConnection.GlobalValue;
             con = new SqlConnection(conString);
             con.Open();
             query = "select Name,Mob from Customers";
